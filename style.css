@@ -71,6 +71,12 @@ body {
 }
 
 /* Contenedores de entrada y botón */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .input-wrapper {
     display: flex;
     justify-content: center;
@@ -102,6 +108,11 @@ body {
     border-radius: 25px 0 0 25px;
     font-family: "Merriweather", serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.fail-message {
+    margin-top: 3px;
+    font-family: "Merriweather", serif;
 }
 
 /* Estilos de botón */
