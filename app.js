@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let amigos = [];
   let caja = document.querySelector("#amigo");
   let listaHTML = document.getElementById("listaAmigos");
+  let agregar = document.getElementById("amigo");
+  let sortear = document.getElementById("btnSortear");
 
   // Función para asignar texto y estilos a los elementos
   function asignarTextoElemento(elemento, texto, tamaño, color) {
@@ -111,9 +113,102 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Agregar amigos al hacer click en el botón
-  document.getElementById("Agregar").addEventListener("click", function () {
-    agregarAmigo();
+  // Función para generar el indice d ela lista
+  function generarIndiceAleatorio() {
+    let indice = Math.floor(Math.random() * amigos.length);
+    console.log(indice);
+    return { indiceAleatorio: indice };
+  }
+
+  // Función para sortear el amigo secreto
+  function sortearAmigo() {
+    // Verificar si no hay amigos en la lista
+    if (amigos.length === 0) {
+      asignarTextoElemento(
+        "mensaje",
+        "¡No has ingresado amigos para sortear!",
+        "16px",
+        "#9e0433"
+      );
+      mostrarLista();
+      return; // No continuar si la lista está vacía
+    }
+
+    // Generar un índice aleatorio para seleccionar un amigo
+    let indice = generarIndiceAleatorio().indiceAleatorio;
+    let amigoSorteado = amigos[indice];
+
+    // Mostrar el amigo secreto sorteado
+    if (amigos.length > 0) {
+      asignarTextoElemento(
+        "mensaje",
+        `Tu amigo secreto es ${amigoSorteado}`,
+        "16px",
+        "#1d2ac4"
+      );
+
+      // Eliminar el amigo sorteado de la lista para evitar repetirlo
+      amigos.splice(indice, 1);
+      console.log(amigos, amigos.length);
+    }
+
+    // Verificar si ya no hay más amigos para sortear
+    if (amigos.length === 0) {
+      asignarTextoElemento(
+        "mensaje",
+        "¡Ya no hay más amigos disponibles para sortear!",
+        "16px",
+        "#d01111"
+      );
+      mostrarLista(); // Mostrar la lista vacía
+    }
+
+    // Actualizar la lista de amigos en la página
     actualizarListaAmigos();
-  });
+  }
+
+  // Función para ocultar la lista de amigos
+  function ocultarLista() {
+    listaHTML.style.display = "none"; // Ocultar la lista de amigos
+  }
+
+  // Función para mostrar la lista de amigos
+  function mostrarLista() {
+    listaHTML.style.display = "block"; // Mostrar la lista de amigos
+  }
+
+  function condicionesIniciales() {
+    // Agregar amigos al presionar Enter en el campo de texto
+    agregar.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        // Comprobar si la tecla presionada es Enter
+        agregarAmigo(); // Llamar a la función para agregar el amigo
+        actualizarListaAmigos(); // Actualizar la lista de amigos en la página
+        event.preventDefault(); // Evitar el comportamiento por defecto de la tecla Enter (como saltar de campo)
+      }
+    });
+
+    // Añadir el event listener para el botón "Agregar"
+    document.getElementById("Agregar").addEventListener("click", function () {
+      agregarAmigo(); // Llama a la función para agregar el amigo
+      actualizarListaAmigos(); // Actualiza la lista de amigos en la página
+    });
+
+    // Al hacer click en el botón "Sortear amigo"
+    sortear.addEventListener("click", function () {
+      ocultarLista(); // Ocultar la lista antes de sortear
+      sortearAmigo(); // Sortear amigo
+    });
+
+    // Al presionar Enter en el botón "Sortear amigo"
+    sortear.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        ocultarLista(); // Ocultar la lista antes de sortear
+        sortearAmigo(); // Sortear amigo
+        event.preventDefault(); // Evitar el comportamiento por defecto de la tecla Enter
+      }
+    });
+  }
+
+  condicionesIniciales();
 });
