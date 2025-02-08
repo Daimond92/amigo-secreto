@@ -1,6 +1,10 @@
-// El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
+/*
+----------------------------------------------------------------------------------
+Esta web fue desarrolado por David Malaver como challenge en el curso Alura Latam
+----------------------------------------------------------------------------------
+*/
 
-//
+// Se asegura que el código solo se ejecute hasta que el DOM este construido
 document.addEventListener("DOMContentLoaded", function () {
   // Declaración de variables
   let amigos = [];
@@ -130,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "16px",
         "#9e0433"
       );
+      reiniciarLista();
       mostrarLista();
       return; // No continuar si la lista está vacía
     }
@@ -149,19 +154,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Eliminar el amigo sorteado de la lista para evitar repetirlo
       amigos.splice(indice, 1);
-      console.log(amigos, amigos.length);
+      //console.log(amigos, amigos.length);
+      return;
     }
 
     // Verificar si ya no hay más amigos para sortear
-    if (amigos.length === 0) {
+    /*if (amigos.length === 0) {
       asignarTextoElemento(
         "mensaje",
         "¡Ya no hay más amigos disponibles para sortear!",
         "16px",
         "#d01111"
       );
+      return;
       mostrarLista(); // Mostrar la lista vacía
-    }
+    }*/
 
     // Actualizar la lista de amigos en la página
     actualizarListaAmigos();
@@ -175,6 +182,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Función para mostrar la lista de amigos
   function mostrarLista() {
     listaHTML.style.display = "block"; // Mostrar la lista de amigos
+  }
+
+  // Función para reiniciar la lista de amigos
+  function reiniciarLista() {
+    listaHTML.innerHTML = ""; // Mostrar la lista de amigos
   }
 
   function condicionesIniciales() {
