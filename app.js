@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "#2ec819"
       );
 
-      console.log("Amigos:", amigos); // Mostrar la lista de amigos en la consola
+      //console.log("Amigos:", amigos); // Mostrar la lista de amigos en la consola
 
       // Limpiar caja
       limpiarCajaLista(caja);
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Función para generar el indice d ela lista
   function generarIndiceAleatorio() {
     let indice = Math.floor(Math.random() * amigos.length);
-    console.log(indice);
+    //console.log(indice);
     return { indiceAleatorio: indice };
   }
 
